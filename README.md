@@ -2,20 +2,20 @@
 
 == Changelog ==
 v0.1
-> New "Ender Mirror" item:
-> > Usage: 
-    Right click to teleport home;
-    If no home is set then it teleports near 0, 0;
-    Cancel teleport by not holding item;
-> > Breaking:
-    25 uses before breaking;
-    Has 90% to give back Broken Mirror;
-    Grants new "Mirror, Mirror" advancement;
-> > Crafting/Repairing:
-    Craft with "Symbiosis";
-    Requires Broken Mirror and Eye of Ender;
-> > Finding Naturally:
-    Can be found in Nether Fortress and End City chests;
+    New "Ender Mirror" item:
+        Usage: 
+            Right click to teleport home;
+            If no home is set then it teleports near 0, 0;
+            Cancel teleport by not holding item;
+        Breaking:
+            25 uses before breaking;
+            Has 90% to give back Broken Mirror;
+            Grants new "Mirror, Mirror" advancement;
+        Crafting/Repairing:
+            Craft with "Symbiosis";
+            Requires Broken Mirror and Eye of Ender;
+        Finding Naturally:
+            Can be found in Nether Fortress and End City chests;
   
 > New "Broken Mirror" item:
 > > Usage:
