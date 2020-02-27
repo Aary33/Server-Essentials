@@ -1,0 +1,7 @@
+{
+  "custom.magic_mirror.use": {
+        "sounds": [
+            "custom/magic_mirror/use"
+        ]
+    }
+}
