@@ -1,0 +1,8 @@
+{
+  "values": [
+    "server-essentials:magic_mirror/animation",
+    "server-essentials:magic_mirror/check_craft",
+    "server-essentials:tick",
+    "minecraft:trident/tick"
+  ]
+}

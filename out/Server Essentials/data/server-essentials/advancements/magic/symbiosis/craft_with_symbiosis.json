@@ -1,0 +1,32 @@
+{
+  "parent": "server-essentials:magic/root",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "hidden": "true",
+    "icon": {
+      "nbt": "{\"CustomModelData\":9797001,\"TridentCustomItem\":-1496185732,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"Gaze into the eye to return home.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Ender Mirror\\\",\\\"color\\\":\\\"aqua\\\",\\\"italic\\\":false}\"},\"Enchantments\":[{}]}",
+      "item": "minecraft:carrot_on_a_stick"
+    },
+    "description": {
+      "color": "light_purple",
+      "text": "Use a nether portal to craft an item"
+    },
+    "title": {
+      "color": "white",
+      "text": "Symbiosis"
+    },
+    "announce_to_chat": "true",
+    "frame": "task"
+  },
+  "rewards": {
+    "recipes": [],
+    "loot": [
+      ""
+    ],
+    "experience": 0
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "pools": [
+    {
+      "entries": [
+        {
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"gray\\\",\\\"italic\\\":false}\"}}"
+            }
+          ],
+          "name": "minecraft:carrot_on_a_stick",
+          "weight": 10,
+          "type": "item"
+        },
+        {
+          "weight": 1,
+          "type": "empty"
+        }
+      ],
+      "rolls": 1
+    }
+  ]
+}

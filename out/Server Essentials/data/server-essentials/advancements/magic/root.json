@@ -1,0 +1,30 @@
+{
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "background": "minecraft:textures/gui/advancements/backgrounds/nether.png",
+    "icon": {
+      "item": "minecraft:knowledge_book"
+    },
+    "description": {
+      "color": "light_purple",
+      "text": "Quest for infinite knowledge",
+      "bold": "false"
+    },
+    "title": {
+      "color": "white",
+      "text": "Magic",
+      "bold": "false"
+    }
+  },
+  "rewards": {
+    "recipes": [],
+    "loot": [
+      ""
+    ],
+    "experience": 0
+  }
+}

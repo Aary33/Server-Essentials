@@ -1,0 +1,19 @@
+scoreboard objectives add portal_cooldown dummy
+scoreboard objectives add mirror_cooldown dummy
+scoreboard objectives add tdci_held dummy
+scoreboard objectives add id.L dummy
+scoreboard objectives add id.M dummy
+scoreboard objectives add leave_game minecraft.custom:minecraft.leave_game
+scoreboard objectives add mirror_damage dummy
+scoreboard objectives add owner.M dummy
+scoreboard objectives add tdci_mainhand dummy
+scoreboard objectives add uitem.3649cc34 minecraft.used:minecraft.carrot_on_a_stick "used item minecraft:carrot_on_a_stick"
+scoreboard objectives add owner.L dummy
+scoreboard objectives add oldtdci_offhand dummy
+scoreboard objectives add thrower.L dummy
+scoreboard objectives add tp_limit dummy
+scoreboard objectives add tdci_offhand dummy
+scoreboard objectives add thrower.M dummy
+scoreboard objectives add oldtdci_held dummy
+scoreboard objectives add age dummy
+scoreboard objectives add oldtdci_mainhand dummy

@@ -1,0 +1,32 @@
+{
+  "parent": "server-essentials:magic/root",
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "hidden": "true",
+    "icon": {
+      "nbt": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"gray\\\",\\\"italic\\\":false}\"}}",
+      "item": "minecraft:carrot_on_a_stick"
+    },
+    "description": {
+      "color": "aqua",
+      "text": "Break an Ender Mirror"
+    },
+    "title": {
+      "color": "white",
+      "text": "Mirror, Mirror"
+    },
+    "announce_to_chat": "true",
+    "frame": "task"
+  },
+  "rewards": {
+    "recipes": [],
+    "loot": [
+      ""
+    ],
+    "experience": 0
+  }
+}

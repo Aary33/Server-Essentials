@@ -1,0 +1,150 @@
+{
+  "pools": [
+    {
+      "entries": [
+        {
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:diamond",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 5,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:iron_ingot",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:gold_ingot",
+          "weight": 15,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:golden_sword",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:golden_chestplate",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:flint_and_steel",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3,
+                "max": 7,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:nether_wart",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:saddle",
+          "weight": 10,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:golden_horse_armor",
+          "weight": 8,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:iron_horse_armor",
+          "weight": 5,
+          "type": "minecraft:item"
+        },
+        {
+          "name": "minecraft:diamond_horse_armor",
+          "weight": 3,
+          "type": "minecraft:item"
+        },
+        {
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 4,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:obsidian",
+          "weight": 2,
+          "type": "minecraft:item"
+        },
+        {
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\"CustomModelData\":9797001,\"TridentCustomItem\":-1496185732,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"Gaze into the eye to return home.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Ender Mirror\\\",\\\"color\\\":\\\"aqua\\\",\\\"italic\\\":false}\"},\"Enchantments\":[{}]}"
+            },
+            {
+              "damage": 0.19,
+              "function": "set_damage"
+            }
+          ],
+          "name": "minecraft:carrot_on_a_stick",
+          "weight": 2,
+          "type": "item"
+        },
+        {
+          "functions": [
+            {
+              "function": "set_nbt",
+              "tag": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"gray\\\",\\\"italic\\\":false}\"}}"
+            }
+          ],
+          "name": "minecraft:carrot_on_a_stick",
+          "weight": 8,
+          "type": "item"
+        }
+      ],
+      "rolls": {
+        "min": 2,
+        "max": 4,
+        "type": "minecraft:uniform"
+      }
+    }
+  ],
+  "type": "minecraft:chest"
+}
