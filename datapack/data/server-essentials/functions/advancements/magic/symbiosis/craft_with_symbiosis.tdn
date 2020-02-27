@@ -1,0 +1,43 @@
+var broken_mirror_name = broken_mirror.baseType
+var broken_mirror_tag = JSON.stringify(nbt<${broken_mirror.getItemTag()}>.toDictionary(), false)
+var magic_mirror_name = magic_mirror.baseType
+var magic_mirror_tag = JSON.stringify(nbt<${magic_mirror.getItemTag()}>.toDictionary(), false)
+
+
+
+eval File.out.writeData(
+    "data/server-essentials/advancements/magic/symbiosis/craft_with_symbiosis.json" ,
+    JSON.stringify(
+        {
+            "display": {
+                "icon": {
+                    "item": magic_mirror_name,
+                    "nbt": magic_mirror_tag
+                },
+                "title": {
+                "text": "Symbiosis",
+                "color": "white"
+                },
+                "description": {
+                "text": "Use a nether portal to craft an item",
+                "color": "light_purple"
+                },
+                "frame": "task",
+                "hidden": "true",
+                "announce_to_chat": "true"
+            },
+            "criteria": {
+                "impossible": {
+                    "trigger": "minecraft:impossible"
+                }
+            },
+            "rewards": {
+                "recipes": [],
+                "loot": [""],
+                "experience": 0
+            },
+            "parent" : "server-essentials:magic/root"
+        },
+        true
+    )
+)

@@ -1,0 +1,300 @@
+@on compile
+  
+define objective portal_cooldown 
+
+define objective mirror_cooldown
+define objective mirror_damage
+define objective tp_limit                   
+var mirror_sound = resource <custom.magic_mirror.use>
+var mirror_break_adv = resource <server-essentials:magic/symbiosis/break_magic_mirror>
+var symbiosis_adv = resource <server-essentials:magic/symbiosis/craft_with_symbiosis>
+var cooldown = 46
+
+var self = entity<@e[limit=1,sort=nearest,distance=0]>
+
+var max_uses = 25
+
+define objective id.L
+define objective id.M
+define objective owner.L
+define objective owner.M
+define objective thrower.L
+define objective thrower.M
+
+
+#Mirror Items
+var repair_item = entity<@e[limit=1,sort=nearest,distance=0..2,nbt={
+        Item:{
+            id:"minecraft:ender_eye",
+            Count:1b
+        }
+    }]>
+
+define item broken_mirror minecraft:carrot_on_a_stick#9797002 {
+    default name { "text" : "Broken Mirror", "color" : "gray", "italic" : false}
+
+    default lore [
+            [
+                {"text" : "A frame of what once was.",
+                    "color" : "dark_purple",
+                    "italic" : false
+                }]
+            ]
+
+    default nbt {
+    }
+
+    
+}
+
+define item magic_mirror minecraft:carrot_on_a_stick#9797001 {
+    default name { "text" : "Ender Mirror", "color" : "aqua", "italic" : false}
+
+    default lore [
+                [
+                {"text" : "Gaze into the eye to return home.",
+                    "color" : "dark_purple",
+                    "italic" : false
+                }]
+            ]
+
+    default nbt {
+        Enchantments:[{}]
+    }
+    
+    #Mirror Behaviors
+
+    function y_check {
+        scoreboard players remove @s tp_limit 1
+        
+        #If current block is not air or limit is reached, teleport here
+        unless block ~ ~ ~ minecraft:air
+        set @s->tp_limit = 0
+        
+        if score @s tp_limit matches 0
+        teleport @s ~ ~2 ~
+        
+        #If limit has not been reached, loop recursively
+        if score @s tp_limit matches 1..
+        positioned ~ ~-1 ~
+        function /
+    }       
+
+    function teleport_home {
+        effect give @s minecraft:resistance 1 5 true
+        summon $blast ~ ~1 ~
+        summon $home ~ ~ ~
+            
+        var home_instance = entity<@e[tag=dummy,tag=home,tag=new,limit=1,sort=nearest]>
+            
+        teleport $home_instance @s
+        
+        in minecraft:overworld
+        forceload add -1 -1 1 1
+        
+        in minecraft:overworld
+        teleport $home_instance 0 0 0
+            
+        store result entity $home_instance Pos[0] double 1
+        run
+            data get entity @s SpawnX 1 
+        store result entity $home_instance Pos[1] double 1
+        run
+            data get entity @s SpawnY 1 
+        store result entity $home_instance Pos[2] double 1
+        run
+            data get entity @s SpawnZ 1 
+        
+        in minecraft:overworld
+        at $home_instance
+        teleport $home_instance ~0.5 ~ ~0.5
+        
+        in minecraft:overworld
+        at $home_instance
+        forceload add ~-1 ~-1 ~1 ~1
+            
+        in minecraft:overworld
+        at $home_instance expand {
+            #3 Teleport Checks:
+                
+            #Check available block from sky to void | Guaranteed
+            set @s->tp_limit = 256
+            positioned ~ 256 ~
+            function ${this.y_check}
+                
+            #Check available block from sky to void | May fail
+            spreadplayers ~ ~ 0 5 false @s
+                
+            #Check if bed | May fail
+            if block ~ ~1 ~ minecraft:air
+            if block ~ ~ ~ #minecraft:beds
+            teleport @s $home_instance
+        }
+        playsound minecraft:entity.enderman.teleport player @a ~ ~ ~ 5 0.9 1
+        
+        if entity @s[gamemode=!creative]
+        function ${this.damage}
+        
+        as @s
+        at @s
+        summon $blast ~ ~1 ~
+        
+        
+        in minecraft:overworld
+        at $home_instance
+        forceload remove ~-1 ~-1 ~1 ~1
+        
+        in minecraft:overworld
+        forceload remove -1 -1 1 1
+        
+        kill $home_instance
+    }
+    
+    function destroy {
+        playsound minecraft:block.glass.break player @a ~ ~ ~ 5 1.1 0
+        replaceitem entity @s weapon.mainhand minecraft:air
+        advancement grant @s until $mirror_break_adv
+        loot give @s loot server-essentials:custom/mirror_loop_chance
+    }
+    
+    function damage {
+        
+        store result score @s mirror_damage
+        data get entity @s SelectedItem.tag.Damage
+        
+        var i = null
+        for (i = 0; i < max_uses; i++) {
+            var h = $i
+            eval h++
+            
+            var new_dmg = nbt_value<{Damage: ${new tag_short(h)}}>
+            
+            if score @s mirror_damage matches $i
+            replaceitem entity @s weapon.mainhand $magic_mirror$new_dmg 1
+            
+        }
+        
+        if score @s mirror_damage matches $max_uses
+        function ${this.destroy}
+    }
+    
+    function animation {
+        @tag tick
+        
+        #Player Check
+        set @a->mirror_cooldown += 0
+            
+        as @a
+        at @s
+        if entity @s[scores={mirror_cooldown=1..}] expand {
+                
+            if score @s mirror_cooldown matches $cooldown
+            playsound $mirror_sound player @a ~ ~ ~ 5 0.8 0
+    
+            raw ${"if entity @s[nbt={SelectedItem:{tag:" + magic_mirror.getItemTag() + "}}]"}
+            if score @s mirror_cooldown matches 1
+            function ${this.teleport_home}
+            
+                
+            particle minecraft:end_rod ~ ~1 ~ 0.1 0.1 0.1 0.05 1 normal @a
+            particle minecraft:dragon_breath ~ ~1 ~ 0.5 0.5 0.5 0.1 2 normal @a
+            set @s->mirror_cooldown -= 1
+        }
+        
+    }
+    
+    function craft {
+        kill $repair_item
+        /${"summon minecraft:item ~ ~ ~ {Motion:[0.0,0.5,0.0],PickupDelay:40s,PortalCooldown:300,Item:" + magic_mirror.getSlotNBT() + "}"}
+        playsound minecraft:item.trident.thunder player @a ~ ~ ~ 5 1.9 0
+        particle minecraft:totem_of_undying ~ ~1 ~ 0.2 0.5 0.2 0 10 normal @a
+        
+        #Target owner
+        as @s
+        at @s
+        as @a
+        if score @s id.L = $self thrower.L
+        if score @s id.M = $self thrower.M
+        advancement grant @s until $symbiosis_adv
+        
+        kill @s
+    }
+    
+    function check_craft {
+        @tag tick
+        
+        raw ${"as @e[nbt={Item:{tag:" + broken_mirror.getItemTag() + "}}]"}
+        at @s expand {
+            
+            if score @s portal_cooldown matches 1..
+            if entity $repair_item
+            function ${this.craft}
+            
+            set @s->portal_cooldown = @s.PortalCooldown
+        }
+
+        
+    }
+    
+    
+    on used function use {
+        if entity @s[scores={mirror_cooldown=0}]
+            set @s->mirror_cooldown = $cooldown
+        
+    }
+}
+
+#Mirror Entities
+
+define entity home minecraft:armor_stand {
+    
+    default name [
+            "",
+            {"text":"Home"}
+    ]
+    
+    default nbt {
+            Small: 0b,
+            ShowArms: 0b,
+            Invisible: 1b,
+            NoGravity: 1b,
+            Marker: 1b,
+            Glowing: 0b,
+            DisabledSlots: 2039583,
+            Tags:["dummy", "home", "new"]
+    }
+
+    default health 20
+
+}
+
+define entity blast minecraft:firework_rocket {
+    default name [
+            "",
+            {"text":"Teleport Blast"}
+    ]
+    
+    default nbt {
+        LifeTime:1,
+        FireworksItem:
+        {
+            id:firework_rocket,
+            Count:1b,
+            tag:
+            {
+                Fireworks:{
+                    Flight:1b,
+                    Explosions:[
+                        {
+                            Type:0b,
+                            Flicker:0b,
+                            Trail:0b,
+                            Colors:[I;12156866],
+                            FadeColors:[I;1780496]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

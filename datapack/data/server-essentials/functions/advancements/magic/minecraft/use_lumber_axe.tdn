@@ -1,0 +1,40 @@
+var broken_mirror_name = broken_mirror.baseType
+var broken_mirror_tag = JSON.stringify(nbt<${broken_mirror.getItemTag()}>.toDictionary(), false)
+var magic_mirror_name = magic_mirror.baseType
+var magic_mirror_tag = JSON.stringify(nbt<${magic_mirror.getItemTag()}>.toDictionary(), false)
+
+
+
+eval File.out.writeData(
+    "data/server-essentials/advancements/magic/minecraft/use_lumber_axe.json" ,
+    JSON.stringify(
+        {
+            "display": {
+                "icon": {
+                    "item": "minecraft:iron_axe"
+                },
+                "title": {
+                "text": "Timber!",
+                "color": "white"
+                },
+                "description": {
+                "text": "Capitate a tree using a Lumber's Axe",
+                "color": "green"
+                },
+                "frame": "task"
+            },
+            "criteria": {
+                "impossible": {
+                    "trigger": "minecraft:impossible"
+                }
+            },
+            "rewards": {
+                "recipes": [],
+                "loot": [""],
+                "experience": 20
+            },
+            "parent" : "minecraft:story/smelt_iron"
+        },
+        true
+    )
+)

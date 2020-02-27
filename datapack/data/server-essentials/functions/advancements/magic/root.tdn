@@ -1,0 +1,41 @@
+var broken_mirror_name = broken_mirror.baseType
+var broken_mirror_tag = JSON.stringify(nbt<${broken_mirror.getItemTag()}>.toDictionary(), false)
+var magic_mirror_name = magic_mirror.baseType
+var magic_mirror_tag = JSON.stringify(nbt<${magic_mirror.getItemTag()}>.toDictionary(), false)
+
+
+
+eval File.out.writeData(
+    "data/server-essentials/advancements/magic/root.json" ,
+    JSON.stringify(
+        {
+            "display": {
+                "icon": {
+                    "item": "minecraft:knowledge_book"
+                },
+                "title": {
+                "text": "Magic",
+                "color": "white",
+                "bold": "false"
+                },
+                "description": {
+                "text": "Quest for infinite knowledge",
+                "color": "light_purple",
+                "bold": "false"
+                },
+                "background": "minecraft:textures/gui/advancements/backgrounds/nether.png"
+            },
+            "criteria": {
+                "impossible": {
+                    "trigger": "minecraft:impossible"
+                }
+            },
+            "rewards": {
+                "recipes": [],
+                "loot": [""],
+                "experience": 0
+            }
+        },
+        true
+    )
+)

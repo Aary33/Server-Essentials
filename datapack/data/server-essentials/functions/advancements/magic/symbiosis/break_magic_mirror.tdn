@@ -1,0 +1,43 @@
+var broken_mirror_name = broken_mirror.baseType
+var broken_mirror_tag = JSON.stringify(nbt<${broken_mirror.getItemTag()}>.toDictionary(), false)
+var magic_mirror_name = magic_mirror.baseType
+var magic_mirror_tag = JSON.stringify(nbt<${magic_mirror.getItemTag()}>.toDictionary(), false)
+
+
+
+eval File.out.writeData(
+    "data/server-essentials/advancements/magic/symbiosis/break_magic_mirror.json" ,
+    JSON.stringify(
+        {
+            "display": {
+                "icon": {
+                    "item": broken_mirror_name,
+                    "nbt": broken_mirror_tag
+                },
+                "title": {
+                "text": "Mirror, Mirror",
+                "color": "white"
+                },
+                "description": {
+                "text": "Break an Ender Mirror",
+                "color": "aqua"
+                },
+                "frame": "task",
+                "hidden": "true",
+                "announce_to_chat": "true"
+            },
+            "criteria": {
+                "impossible": {
+                    "trigger": "minecraft:impossible"
+                }
+            },
+            "rewards": {
+                "recipes": [],
+                "loot": [""],
+                "experience": 0
+            },
+            "parent" : "server-essentials:magic/root"
+        },
+        true
+    )
+)

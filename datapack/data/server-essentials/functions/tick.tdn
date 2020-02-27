@@ -1,0 +1,51 @@
+@tag tick
+
+#All
+define objective age
+
+
+#Player-specific
+define objective leave_game minecraft.custom:minecraft.leave_game
+
+
+define function left_game {
+    set @s->leave_game = 0
+    tellraw @s ["",{"text":"Welcome, ","color":"yellow"},{"selector":"@s","color":"yellow"}]
+}
+
+define function existance {
+    store result score @s id.L
+        data get entity @s UUIDLeast 0.00000000001
+    store result score @s id.M
+        data get entity @s UUIDMost 0.00000000001
+    
+    store result score @s owner.L
+        data get entity @s Owner.L 0.00000000001
+    store result score @s owner.M
+        data get entity @s Owner.M 0.00000000001
+    
+    store result score @s thrower.L
+        data get entity @s Thrower.L 0.00000000001
+    store result score @s thrower.M
+        data get entity @s Thrower.M 0.00000000001
+    
+    
+}
+
+as @e
+at @s
+    set @s->age += 1
+
+as @e[scores={age=1}]
+at @s
+    function /existance
+
+as @a[scores={age=1}]
+at @s
+    function /left_game
+
+as @a[scores={leave_game=1..}]
+at @s
+    function /left_game
+
+

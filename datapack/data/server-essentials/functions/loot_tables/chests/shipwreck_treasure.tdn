@@ -1,0 +1,154 @@
+var broken_mirror_name = broken_mirror.baseType
+var broken_mirror_tag = JSON.stringify(nbt<${broken_mirror.getItemTag()}>.toDictionary(), false)
+
+
+
+eval File.out.writeData(
+    "data/minecraft/loot_tables/chests/shipwreck_treasure.json" ,
+    JSON.stringify(
+        {
+            "type": "minecraft:chest",
+            "pools": [
+                {
+                    "rolls":
+                    {
+                        "min": 0,
+                        "max": 2,
+                        "type": "minecraft:uniform"
+                    },
+                    "entries": [
+                        {
+                            "type":"item",
+                            "name": broken_mirror_name,
+                            "functions":[
+                                {
+                                    "function":"set_nbt",
+                                    "tag": broken_mirror_tag
+                                }        
+                            ]        
+                        }
+                    ]
+                },
+                {
+                    "rolls":{
+                        "min":3,
+                        "max":6,
+                        "type":"minecraft:uniform"
+                    },
+                    "entries":[
+                        {
+                            "type":"minecraft:item",
+                            "weight":90,
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":1,
+                                        "max":5,
+                                        "type":"minecraft:uniform"
+                                    }
+                                }
+                            ],
+                            "name":"minecraft:iron_ingot"
+                        },
+                        {
+                            "type":"minecraft:item",
+                            "weight":10,
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":1,
+                                        "max":5,
+                                        "type":"minecraft:uniform"
+                                    }
+                                }
+                            ],
+                            "name":"minecraft:gold_ingot"
+                        },
+                        {
+                            "type":"minecraft:item",
+                            "weight":40,
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":1,
+                                        "max":5,
+                                        "type":"minecraft:uniform"
+                                    }
+                                }
+                            ],
+                            "name":"minecraft:emerald"
+                        },
+                        {
+                            "type":"minecraft:item",
+                            "weight":5,
+                            "name":"minecraft:diamond"
+                        },
+                        {
+                            "type":"minecraft:item",
+                            "weight":5,
+                            "name":"minecraft:experience_bottle"
+                        }
+                    ]
+                },
+                {
+                    "rolls":{
+                        "min":2,
+                        "max":5,
+                        "type":"minecraft:uniform"
+                    },
+                    "entries":[
+                        {
+                            "type":"minecraft:item",
+                            "weight":50,
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":1,
+                                        "max":10,
+                                        "type":"minecraft:uniform"
+                                    }
+                                }
+                            ],
+                            "name":"minecraft:iron_nugget"
+                        },
+                        {
+                            "type":"minecraft:item",
+                            "weight":10,
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":1,
+                                        "max":10,
+                                        "type":"minecraft:uniform"
+                                    }
+                                }
+                            ],
+                            "name":"minecraft:gold_nugget"
+                        },
+                        {
+                            "type":"minecraft:item",
+                            "weight":20,
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":1,
+                                        "max":10,
+                                        "type":"minecraft:uniform"
+                                    }
+                                }
+                            ],
+                            "name":"minecraft:lapis_lazuli"
+                        }
+                    ]
+                }
+            ]
+        },
+        true
+    )
+)

@@ -1,0 +1,57 @@
+var broken_mirror_name = broken_mirror.baseType
+var broken_mirror_tag = JSON.stringify(nbt<${broken_mirror.getItemTag()}>.toDictionary(), false)
+
+
+
+eval File.out.writeData(
+    "data/minecraft/loot_tables/entities/endermite.json" ,
+    JSON.stringify(
+        {
+            "type":"minecraft:entity",
+            "pools":[
+                {
+                    "conditions": 
+                    [
+                        {
+                            "condition": "minecraft:killed_by_player"
+                        },
+                        {
+                            "condition": "minecraft:random_chance_with_looting",
+                            "chance": 0.1,
+                            "looting_multiplier": 0.1
+                        }
+                    ],
+                    "rolls":1,
+                    "entries":[
+                        {
+                            "type":"minecraft:item",
+                            "functions":[
+                                {
+                                    "function":"minecraft:set_count",
+                                    "count":{
+                                        "min":0,
+                                        "max":1,
+                                        "type":"minecraft:uniform"
+                                    }
+                                },
+                                {
+                                    "function":"minecraft:looting_enchant",
+                                    "count":{
+                                        "min":0,
+                                        "max":1
+                                    }
+                                },
+                                {
+                                    "function":"set_nbt",
+                                    "tag": broken_mirror_tag
+                                }    
+                            ],
+                            "name": broken_mirror_name
+                        }
+                    ]
+                }
+            ]
+        },
+        true
+    )
+)
