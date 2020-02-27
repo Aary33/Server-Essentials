@@ -1,6 +1,6 @@
 # Welcome to Aary33's Server Essentials Datapack!
 
-#### Features
+### Features
 ###### Items
 - Ender Mirror
 - Broken Mirror
@@ -11,7 +11,7 @@ Magic
 - "Mirror, Mirror"
 - "Symbiosis"
 
-#### Changelog
+### Changelog
 ###### v0.1
 ###### New "Ender Mirror" item
 - Right click to teleport home
