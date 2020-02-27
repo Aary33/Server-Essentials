@@ -1,7 +1,9 @@
 # Welcome to Aary33's Server Essentials Datapack!
 
 ### Installing
-
+1. If updating, delete (do NOT merge) the previous versions of the datapack.
+2. In the 'out' directory, you will find 'Server Essentials'. Copy 'Server Essentials' into the 'datapacks' folder of your Minecraft world save directory.
+3. Add 'Server Essentials-resources.zip' to your resource packs folder if singleplayer. If multiplayer, set server.properties to download the datapack accordingly.
 ### Features
 ###### Items
 - Ender Mirror
