@@ -35,3 +35,6 @@ Magic
 - Output will be on the other dimension
 - Grants "Symbiosis" advancement on first use
 - Sound will play if successful
+
+### Credit
+Made using Trident: https://energyxxer.com/trident/
