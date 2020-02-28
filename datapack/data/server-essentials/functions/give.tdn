@@ -1,9 +1,9 @@
 define function magic_mirror {
-    give @a $magic_mirror
+    give @s $magic_mirror
 }
 
 define function broken_mirror {
-    give @a $broken_mirror
+    give @s $broken_mirror
 }
 
 define function equip {

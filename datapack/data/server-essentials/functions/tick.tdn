@@ -1,7 +1,6 @@
 @tag tick
 
 #All
-define objective age
 
 
 #Player-specific
@@ -19,16 +18,18 @@ define function existance {
     store result score @s id.M
         data get entity @s UUIDMost 0.00000000001
     
-    store result score @s owner.L
-        data get entity @s Owner.L 0.00000000001
-    store result score @s owner.M
-        data get entity @s Owner.M 0.00000000001
-    
+    if data entity @s Thrower.L
     store result score @s thrower.L
         data get entity @s Thrower.L 0.00000000001
+    if data entity @s Thrower.M
     store result score @s thrower.M
         data get entity @s Thrower.M 0.00000000001
     
+    if entity @s[type=minecraft:player] expand {
+        set #SPAWN-X->var = @s.Pos[0]
+        set #SPAWN-Y->var = @s.Pos[1]
+        set #SPAWN-Z->var = @s.Pos[2]
+    }
     
 }
 

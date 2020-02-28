@@ -1,6 +1,9 @@
 @on compile
   
+define objective age
+define objective var
 define objective portal_cooldown 
+define objective dimension
 
 define objective mirror_cooldown
 define objective mirror_damage
@@ -8,11 +11,24 @@ define objective tp_limit
 var mirror_sound = resource <custom.magic_mirror.use>
 var mirror_break_adv = resource <server-essentials:magic/symbiosis/break_magic_mirror>
 var symbiosis_adv = resource <server-essentials:magic/symbiosis/craft_with_symbiosis>
+
+#For items
+var self = entity<@e[limit=1,sort=nearest,distance=0..0.1,type=!minecraft:player]>
+
+#For marker, must be identical
+var marker_tags = new nbt(["dummy", "marker"])
+var marker_selector = entity<@e[tag=dummy,tag=marker,limit=1,sort=nearest]>
+
+
+#Mirror timer before using again
 var cooldown = 46
-
-var self = entity<@e[limit=1,sort=nearest,distance=0]>
-
+#Max uses for mirror before breaking
 var max_uses = 25
+
+
+define objective x.spawn
+define objective y.spawn
+define objective z.spawn
 
 define objective id.L
 define objective id.M
@@ -23,7 +39,7 @@ define objective thrower.M
 
 
 #Mirror Items
-var repair_item = entity<@e[limit=1,sort=nearest,distance=0..2,nbt={
+var repair_item = entity<@e[limit=1,sort=nearest,distance=0,nbt={
         Item:{
             id:"minecraft:ender_eye",
             Count:1b
@@ -80,78 +96,123 @@ define item magic_mirror minecraft:carrot_on_a_stick#9797001 {
         function /
     }       
 
-    function teleport_home {
-        effect give @s minecraft:resistance 1 5 true
-        summon $blast ~ ~1 ~
-        summon $home ~ ~ ~
-            
-        var home_instance = entity<@e[tag=dummy,tag=home,tag=new,limit=1,sort=nearest]>
-            
-        teleport $home_instance @s
+    
+    #Store spawn values in player
+    function store_in_player
+    {
+        #Store spawn coordinates to player if bed
+        if data entity @s SpawnX
+        store result score @s x.spawn
+            data get entity @s SpawnX
+        if data entity @s SpawnY
+        store result score @s y.spawn
+            data get entity @s SpawnY
+        if data entity @s SpawnZ
+        store result score @s z.spawn
+            data get entity @s SpawnZ
         
+        #Store world spawn coordinates if no bed
+        unless data entity @s SpawnX
+        store result score @s x.spawn
+            scoreboard players get #SPAWN_X var
+        unless data entity @s SpawnY
+        store result score @s y.spawn
+            scoreboard players get #SPAWN_Y var
+        unless data entity @s SpawnZ
+        store result score @s z.spawn
+            scoreboard players get #SPAWN_Z var
+        
+    }
+    
+    
+    #Create and set ID's for marker
+    function create_marker
+    {
+        #Summon marker
+        summon $marker ~ ~ ~
+        teleport $marker_selector[distance=0..0.1] @s
+        
+        #Set Owner
+        set $marker_selector[distance=0..0.1]->owner.L = @s->id.L
+        set $marker_selector[distance=0..0.1]->owner.M = @s->id.M
+        
+        
+        tag @s add owner
+        
+    }
+    
+    #Store spawn values in marker
+    function store_in_marker
+    {
+        store result score $marker_selector[distance=0..0.1] x.spawn
+            scoreboard players get @s x.spawn
+        store result score $marker_selector[distance=0..0.1] y.spawn
+            scoreboard players get @s y.spawn
+        store result score $marker_selector[distance=0..0.1] z.spawn
+            scoreboard players get @s z.spawn
+        
+    }
+    
+    #Teleport marker
+    function teleport_marker
+    {
         in minecraft:overworld
-        forceload add -1 -1 1 1
+        teleport @s 0 0 0
         
-        in minecraft:overworld
-        teleport $home_instance 0 0 0
-            
-        store result entity $home_instance Pos[0] double 1
-        run
-            data get entity @s SpawnX 1 
-        store result entity $home_instance Pos[1] double 1
-        run
-            data get entity @s SpawnY 1 
-        store result entity $home_instance Pos[2] double 1
-        run
-            data get entity @s SpawnZ 1 
+        store result entity @s Pos[0] 1
+            scoreboard players get @s x.spawn
+        store result entity @s Pos[1] 1
+            scoreboard players get @s y.spawn
+        store result entity @s Pos[2] 1
+            scoreboard players get @s z.spawn
         
-        in minecraft:overworld
-        at $home_instance
-        teleport $home_instance ~0.5 ~ ~0.5
-        
-        in minecraft:overworld
-        at $home_instance
-        forceload add ~-1 ~-1 ~1 ~1
-            
-        in minecraft:overworld
-        at $home_instance expand {
-            #3 Teleport Checks:
-                
-            #Check available block from sky to void | Guaranteed
-            set @s->tp_limit = 256
-            positioned ~ 256 ~
-            function ${this.y_check}
-                
-            #Check available block from sky to void | May fail
-            spreadplayers ~ ~ 0 5 false @s
-                
-            #Check if bed | May fail
-            if block ~ ~1 ~ minecraft:air
-            if block ~ ~ ~ #minecraft:beds
-            teleport @s $home_instance
-        }
-        playsound minecraft:entity.enderman.teleport player @a ~ ~ ~ 5 0.9 1
-        
-        if entity @s[gamemode=!creative]
-        function ${this.damage}
-        
-        as @s
         at @s
-        summon $blast ~ ~1 ~
+        teleport @s ~0.5 ~ ~0.5
         
+        #Second case: Spread
+        at @s
+        unless block ~ ~ ~ minecraft:air
+        spreadplayers ~ ~ 0 5 false @s
         
+        #Third case: World Spawn
+        at @s
+        unless block ~ ~ ~ minecraft:air
+        function ${this.store_world_spawn}
+        
+        #Fourth case: World Spawn Spread
+        at @s
+        unless block ~ ~ ~ minecraft:air
+        spreadplayers ~ ~ 0 5 false @s
+        
+        #Teleport if successful location
+        at @s
+        if block ~ ~ ~ minecraft:air
         in minecraft:overworld
-        at $home_instance
-        forceload remove ~-1 ~-1 ~1 ~1
+        teleport @a[tag=owner] ~ ~ ~
         
-        in minecraft:overworld
-        forceload remove -1 -1 1 1
+        #Failure message
+        at @s
+        unless block ~ ~ ~ minecraft:air
+        tellraw @a[tag=owner] ["",{"text":"The mirror stares back. No safe spawnpoint or worldspawn found.", "color":"gray","italic":true}]
         
-        kill $home_instance
+        
+        tag @a[tag=owner] remove owner
+        
+        kill @s
+    }
+    
+    function store_world_spawn
+    {
+        store result entity @s Pos[0] 1
+            scoreboard players get #SPAWN-X var
+        store result entity @s Pos[1] 1
+            scoreboard players get #SPAWN-Y var
+        store result entity @s Pos[2] 1
+            scoreboard players get #SPAWN-Z var
     }
     
     function destroy {
-        playsound minecraft:block.glass.break player @a ~ ~ ~ 5 1.1 0
+        playsound minecraft:block.glass.break player @a ~ ~ ~ 1 1.1 0
         replaceitem entity @s weapon.mainhand minecraft:air
         advancement grant @s until $mirror_break_adv
         loot give @s loot server-essentials:custom/mirror_loop_chance
@@ -178,24 +239,62 @@ define item magic_mirror minecraft:carrot_on_a_stick#9797001 {
         function ${this.destroy}
     }
     
+    function teleport {
+        if entity @s[gamemode=!creative]
+        function ${this.damage}
+        
+        effect give @s minecraft:resistance 1 5 true
+        
+        at @s
+        summon $blast ~ ~1 ~
+        
+        function ${this.store_in_player}
+        function ${this.create_marker}
+        
+        as $marker_selector[distance=0..0.1]
+        at @s
+        as @a
+        if score @s id.L = $marker_selector[distance=0..0.1] owner.L
+        if score @s id.M = $marker_selector[distance=0..0.1] owner.M
+            function ${this.store_in_marker}
+        
+        as $marker_selector[distance=0..0.1]
+        at @s
+            function ${this.teleport_marker}
+        
+        at @s
+        unless block ~ ~1 ~ minecraft:air
+            spreadplayers ~ ~ 0 5 false @s
+        
+        at @s
+        unless block ~ ~1 ~ minecraft:air
+            teleport @s ~ 256 ~
+        
+        
+        
+        at @s
+        summon $blast ~ ~1 ~
+    }
+    
     function animation {
         @tag tick
         
         #Player Check
         set @a->mirror_cooldown += 0
-            
-        as @a
+        
+        
+        as @a[scores={mirror_cooldown=1}]
         at @s
-        if entity @s[scores={mirror_cooldown=1..}] expand {
-                
-            if score @s mirror_cooldown matches $cooldown
-            playsound $mirror_sound player @a ~ ~ ~ 5 0.8 0
-    
-            raw ${"if entity @s[nbt={SelectedItem:{tag:" + magic_mirror.getItemTag() + "}}]"}
-            if score @s mirror_cooldown matches 1
-            function ${this.teleport_home}
-            
-                
+        raw ${"if entity @s[nbt={SelectedItem:{tag:" + magic_mirror.getItemTag() + "}}]"}
+        if score @s mirror_cooldown matches 1
+            function ${this.teleport}
+        
+        as @a[scores={mirror_cooldown=$cooldown}]
+        at @s
+            playsound $mirror_sound player @a ~ ~ ~ 1 0.8 0
+        
+        as @a[scores={mirror_cooldown=1..}]
+        at @s expand {
             particle minecraft:end_rod ~ ~1 ~ 0.1 0.1 0.1 0.05 1 normal @a
             particle minecraft:dragon_breath ~ ~1 ~ 0.5 0.5 0.5 0.1 2 normal @a
             set @s->mirror_cooldown -= 1
@@ -206,7 +305,7 @@ define item magic_mirror minecraft:carrot_on_a_stick#9797001 {
     function craft {
         kill $repair_item
         /${"summon minecraft:item ~ ~ ~ {Motion:[0.0,0.5,0.0],PickupDelay:40s,PortalCooldown:300,Item:" + magic_mirror.getSlotNBT() + "}"}
-        playsound minecraft:item.trident.thunder player @a ~ ~ ~ 5 1.9 0
+        playsound minecraft:item.trident.thunder player @a ~ ~ ~ 1 1.9 0
         particle minecraft:totem_of_undying ~ ~1 ~ 0.2 0.5 0.2 0 10 normal @a
         
         #Target owner
@@ -246,25 +345,17 @@ define item magic_mirror minecraft:carrot_on_a_stick#9797001 {
 
 #Mirror Entities
 
-define entity home minecraft:armor_stand {
+define entity marker minecraft:area_effect_cloud {
     
     default name [
             "",
-            {"text":"Home"}
+            {"text":"Teleport Marker"}
     ]
     
     default nbt {
-            Small: 0b,
-            ShowArms: 0b,
-            Invisible: 1b,
-            NoGravity: 1b,
-            Marker: 1b,
-            Glowing: 0b,
-            DisabledSlots: 2039583,
-            Tags:["dummy", "home", "new"]
+            Duration:200,
+            Tags:$marker_tags
     }
-
-    default health 20
 
 }
 
@@ -296,5 +387,9 @@ define entity blast minecraft:firework_rocket {
                 }
             }
         }
+    }
+    
+    ticking function particle {
+        particle minecraft:portal ~ ~ ~ 0 0 0 1 100 normal @a
     }
 }
