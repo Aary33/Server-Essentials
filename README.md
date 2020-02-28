@@ -16,6 +16,13 @@ Magic
 - "Symbiosis"
 
 ### Changelog
+
+###### v0.2
+###### Ender Mirror Changes
+- World spawn is now tracked and is default teleportation location
+- 4 test cases for teleportation
+- If all 4 test cases failed, error message is displayed to the player and no teleportation
+
 ###### v0.1
 ###### New "Ender Mirror" item
 - Right click to teleport home
