@@ -8,7 +8,7 @@
   "display": {
     "hidden": "true",
     "icon": {
-      "nbt": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"gray\\\",\\\"italic\\\":false}\"}}",
+      "nbt": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"white\\\",\\\"italic\\\":false}\"}}",
       "item": "minecraft:carrot_on_a_stick"
     },
     "description": {

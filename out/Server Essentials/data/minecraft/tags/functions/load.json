@@ -1,5 +1,8 @@
 {
   "values": [
+    "server-essentials:core/on_load",
+    "server-essentials:addons/experience_loss/on_load",
+    "server-essentials:addons/sleep_vote/on_load",
     "minecraft:trident/create_objectives"
   ]
 }

@@ -1,1 +1,1 @@
-give @s minecraft:carrot_on_a_stick{TridentCustomItem:1724486366,CustomModelData:9797002,display:{Name:"{\"text\":\"Broken Mirror\",\"color\":\"gray\",\"italic\":false}",Lore:["[{\"text\":\"A frame of what once was.\",\"color\":\"dark_purple\",\"italic\":false}]"]}}
+give @s minecraft:carrot_on_a_stick{TridentCustomItem:1724486366,CustomModelData:9797002,display:{Name:"{\"text\":\"Broken Mirror\",\"color\":\"white\",\"italic\":false}",Lore:["[{\"text\":\"A frame of what once was.\",\"color\":\"dark_purple\",\"italic\":false}]"]}}

@@ -1,0 +1,59 @@
+@on compile
+
+define objective 97-age
+define objective 97-var
+
+define objective 97-id.L
+define objective 97-id.M
+define objective 97-owner.L
+define objective 97-owner.M
+define objective 97-thrower.L
+define objective 97-thrower.M
+
+define function on_load {
+    @tag load
+    tellraw @a ["",{"text":"Aary33's Server Essentials","bold":true,"color":"dark_purple"},{"text":" v1.0","color":"aqua"},{"text":" successfully loaded.","color":"light_purple"}]
+
+    #Set constants
+    set #ONE->97-var = 1
+    set #TWO->97-var = 2
+    set #THREE->97-var = 3
+    set #FOUR->97-var = 4
+    set #FIVE->97-var = 5
+    set #SIX->97-var = 6
+    set #SEVEN->97-var = 7
+    set #EIGHT->97-var = 8
+    set #NINE->97-var = 9
+    set #ZERO->97-var = 0
+}
+
+
+define function on_tick {
+    @tag tick
+
+    #All
+    define function existance {
+        store result score @s 97-id.L
+            data get entity @s UUIDLeast 0.00000000001
+        store result score @s 97-id.M
+            data get entity @s UUIDMost 0.00000000001
+        
+        if data entity @s Thrower.L
+        store result score @s 97-thrower.L
+            data get entity @s Thrower.L 0.00000000001
+        if data entity @s Thrower.M
+        store result score @s 97-thrower.M
+            data get entity @s Thrower.M 0.00000000001
+        
+        
+    }
+    
+    as @e
+    at @s
+        set @s->97-age += 1
+    
+    as @e[scores={97-age=1}]
+    at @s
+        function /existance
+    
+}

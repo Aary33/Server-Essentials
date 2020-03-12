@@ -13,7 +13,7 @@ eval File.out.writeData(
                     "rolls":
                     {
                         "min": 0,
-                        "max": 2,
+                        "max": 1,
                         "type": "minecraft:uniform"
                     },
                     "entries": [

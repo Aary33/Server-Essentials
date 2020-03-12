@@ -1,8 +1,11 @@
 {
   "values": [
-    "server-essentials:magic_mirror/animation",
-    "server-essentials:magic_mirror/check_craft",
-    "server-essentials:tick",
+    "server-essentials:core/on_tick",
+    "server-essentials:items/magic_mirror/animation",
+    "server-essentials:items/magic_mirror/check_craft",
+    "server-essentials:addons/experience_loss/on_tick",
+    "server-essentials:addons/sleep_vote/on_tick",
+    "server-essentials:addons/left_game",
     "minecraft:trident/tick"
   ]
 }

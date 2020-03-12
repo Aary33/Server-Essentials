@@ -116,7 +116,7 @@
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{\"CustomModelData\":9797001,\"TridentCustomItem\":-1496185732,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"Gaze into the eye to return home.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Ender Mirror\\\",\\\"color\\\":\\\"aqua\\\",\\\"italic\\\":false}\"},\"Enchantments\":[{}]}"
+              "tag": "{\"CustomModelData\":9797001,\"TridentCustomItem\":-1496185732,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"Gaze into the eye to return home.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Ender Mirror\\\",\\\"color\\\":\\\"yellow\\\",\\\"italic\\\":false}\"}}"
             },
             {
               "damage": 0.19,
@@ -124,18 +124,18 @@
             }
           ],
           "name": "minecraft:carrot_on_a_stick",
-          "weight": 2,
+          "weight": 1,
           "type": "item"
         },
         {
           "functions": [
             {
               "function": "set_nbt",
-              "tag": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"gray\\\",\\\"italic\\\":false}\"}}"
+              "tag": "{\"CustomModelData\":9797002,\"TridentCustomItem\":1724486366,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"A frame of what once was.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Broken Mirror\\\",\\\"color\\\":\\\"white\\\",\\\"italic\\\":false}\"}}"
             }
           ],
           "name": "minecraft:carrot_on_a_stick",
-          "weight": 8,
+          "weight": 2,
           "type": "item"
         }
       ],

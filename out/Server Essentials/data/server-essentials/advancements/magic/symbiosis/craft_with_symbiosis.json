@@ -8,7 +8,7 @@
   "display": {
     "hidden": "true",
     "icon": {
-      "nbt": "{\"CustomModelData\":9797001,\"TridentCustomItem\":-1496185732,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"Gaze into the eye to return home.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Ender Mirror\\\",\\\"color\\\":\\\"aqua\\\",\\\"italic\\\":false}\"},\"Enchantments\":[{}]}",
+      "nbt": "{\"CustomModelData\":9797001,\"TridentCustomItem\":-1496185732,\"display\":{\"Lore\":[\"[{\\\"text\\\":\\\"Gaze into the eye to return home.\\\",\\\"color\\\":\\\"dark_purple\\\",\\\"italic\\\":false}]\"],\"Name\":\"{\\\"text\\\":\\\"Ender Mirror\\\",\\\"color\\\":\\\"yellow\\\",\\\"italic\\\":false}\"}}",
       "item": "minecraft:carrot_on_a_stick"
     },
     "description": {

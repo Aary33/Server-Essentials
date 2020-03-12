@@ -1,0 +1,17 @@
+@tag tick
+
+define objective 97-left_game minecraft.custom:minecraft.leave_game
+
+define function welcome_msg {
+    set @s->97-left_game = 0
+    tellraw @s ["",{"text":"Welcome, ","color":"yellow"},{"selector":"@s","color":"yellow"},{"text":"!","color":"yellow"}]
+}
+
+as @a[scores={97-age=1}]
+at @s
+    function /welcome_msg
+
+as @a[scores={97-left_game=1..}]
+at @s
+    function /welcome_msg
+

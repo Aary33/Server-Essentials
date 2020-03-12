@@ -35,7 +35,7 @@ eval File.out.writeData(
                         },
                         {
                             "type":"item",
-                            "weight": 2,
+                            "weight": 1,
                             "name": magic_mirror_name,
                             "functions":[
                                 {
@@ -61,7 +61,7 @@ eval File.out.writeData(
                         },
                         {
                             "type":"item",
-                            "weight": 2,
+                            "weight": 3,
                             "name": magic_mirror_name,
                             "functions":[
                                 {

@@ -1,0 +1,15 @@
+{
+  "criteria": {
+    "in_bed": {
+      "trigger": "minecraft:slept_in_bed"
+    }
+  },
+  "rewards": {
+    "recipes": [],
+    "function": "server-essentials:advancements/internal/slept_in_bed",
+    "loot": [
+      ""
+    ],
+    "experience": 0
+  }
+}

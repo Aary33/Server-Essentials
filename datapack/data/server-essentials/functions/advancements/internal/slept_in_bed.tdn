@@ -1,0 +1,26 @@
+var function_name = resource </>
+var advancement_name = resource <server-essentials:internal/slept_in_bed>
+
+
+eval File.out.writeData(
+    "data/server-essentials/advancements/internal/slept_in_bed.json" ,
+    JSON.stringify(
+        {
+            "criteria": {
+                "in_bed": {
+                    "trigger": "minecraft:slept_in_bed"
+                }
+            },
+            "rewards": {
+                "recipes": [],
+                "loot": [""],
+                "experience": 0,
+                "function": function_name
+            }
+        },
+        true
+    )
+)
+
+advancement revoke @s only $advancement_name
+set @s->97-slept_trigger += 1

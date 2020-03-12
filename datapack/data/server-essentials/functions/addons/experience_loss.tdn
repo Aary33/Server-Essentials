@@ -1,0 +1,97 @@
+@on compile
+@require server-essentials:core
+
+define objective 97-death_trigger minecraft.custom:minecraft.deaths
+define objective 97-death_timer minecraft.custom:minecraft.time_since_death
+define objective 97-xp.pts xp
+define objective 97-xp.lvl dummy
+define objective 97-xp.half.pts dummy
+define objective 97-xp.half.lvl dummy
+
+
+define entity xp_orb minecraft:experience_orb {
+    default nbt {
+        Tags: ["random"],
+        Age: 0s,
+        Value: 1s,
+        Motion: [0.0,0.0,0.0]
+    }
+}
+
+define function on_load {
+    @tag load
+}
+
+define function on_tick {
+    @tag tick
+    
+        
+    
+    define function death_trigger {
+        set @s->97-xp.half.pts = 0
+        set @s->97-xp.half.pts = @s->97-xp.pts
+        set @s->97-xp.half.pts /= 2
+        
+        
+        
+        define function remove_levels {
+            experience add @s -1 levels
+            set @s->97-xp.half.lvl -= 1
+            
+            
+            unless score @s 97-xp.half.lvl matches ..0
+            function /
+        }
+        
+        define function summon_orbs {      
+            if score @s 97-xp.half.pts matches 1..9 expand {
+                summon $xp_orb ~1 ~1 ~1 {Value:1s,Motion:[1.0,1.0,1.0]}
+                experience add @s -1 points
+                set @s->97-xp.half.pts -= 1
+            }
+            
+            if score @s 97-xp.half.pts matches 10..99 expand {
+                summon $xp_orb ~-1 ~1 ~-1 {Value:10s,Motion:[-1.0,0.75,-1.0]}
+                experience add @s -10 points
+                set @s->97-xp.half.pts -= 10
+                
+            }
+            
+            if score @s 97-xp.half.pts matches 100.. expand {
+                summon $xp_orb ~1 ~1 ~-1 {Value:50s,Motion:[1.0,0.5,-1.0]}
+                summon $xp_orb ~-1 ~1 ~1 {Value:50s,Motion:[-1.0,0.5,1.0]}
+                experience add @s -100 points
+                set @s->97-xp.half.pts -= 100
+            }
+            
+                  
+            
+            unless score @s 97-xp.half.pts matches ..0
+            function /
+        }
+        
+        as @s
+        at @s
+        function /summon_orbs
+        
+        
+        
+        store result score @s 97-xp.lvl 
+            experience query @s levels
+        set @s->97-xp.half.lvl = 0
+        set @s->97-xp.half.lvl = @s->97-xp.lvl
+        set @s->97-xp.half.lvl /= 2
+        
+        
+        as @s
+        at @s
+        function /remove_levels
+        
+        set @s-> 97-death_trigger = 0
+    }
+    
+    
+    as @a[scores={97-death_trigger=1..}]
+    function /death_trigger
+}
+
