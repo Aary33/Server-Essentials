@@ -17,6 +17,23 @@ Magic
 
 ### Changelog
 
+###### v0.3
+###### Death Penalty
+- Players will taken away half their experience levels on death
+- Some experience orbs are dropped
+- Purposely made to work even with keepInventory gamerule enabled
+
+###### Sleep Vote
+- If majority (> 50%) of players are sleeping, turn night into day
+- Parliamentary flavor text 
+
+###### Ender Mirror Changes
+- Teleportation more consistent
+- Increased durability 5 -> 25
+- Added to Enderman loot table, small chance with looting
+- Made rarer in structure loot tables
+- Edited flavor text
+
 ###### v0.2
 ###### Ender Mirror Changes
 - World spawn is now tracked and is default teleportation location
@@ -38,7 +55,7 @@ Magic
 - No right-click functionality
 - Crafting material for Ender Mirror
 - Can be found in Stronghold, Shipwreck, Nether Fortress, and End City chests
-- Endermites have a chance to drop upon death
+- Endermites/Enderman have a chance to drop with looting
     
 ###### New "Symbiosis" crafting method
 - Interdimensional travel can "morph" items together
